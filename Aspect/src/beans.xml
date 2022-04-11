@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+">
+    <bean id="userDao" class="com.my.dao.UDImp"/>
+    <bean id="aspect" class="com.my.xml.DaoAspect"/>
+    <aop:config>
+        <aop:aspect ref="aspect">
+            <aop:pointcut id="myPC" expression="execution(*com.my.Dao..*.*(..))"/>
+            <aop:bofore method="before" pointcut-ref="myPC"/>
+            <aop:after-returning method="after" pointingcut-ref="myPC" returning=""/>
+            <aop:around method="throwing" pointing-ref="myPC" throwing="e"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
