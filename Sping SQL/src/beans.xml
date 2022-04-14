@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <context:property-placeholder location="classpath:c3p0-db.properties"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--    配置JDBCTemplate-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--    配置Dao-->
+    <bean id="aD" class="cn.my.Dao.ADImp">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <!--    配置Service-->
+    <bean id="aSProxy" class="cn.my.Dao.ASImp">
+        <property name="aD" ref="aD"/>
+    </bean>
+    <!--        配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--    生成代理类 让代理管理事务-->
+    <bean id="accountServiceProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <!--        注入事务管理器-->
+        <property name="transactionManager" ref="transactionManager"/>
+        <!--        使用事务管理器增强 aSProxy目标类 transfer()-->
+        <property name="target" ref="aSProxy"/>
+        <!--        提供接口-->
+        <property name="proxyInterfaces" value="cn.my.Dao.AccountService"/>
+        <!--        事务详情配置 给transactionDefinition赋值-->
+        <property name="transactionAttributes">
+            <props>
+                <!--    *  表示增强所有方法-->
+                <prop key="*">PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
