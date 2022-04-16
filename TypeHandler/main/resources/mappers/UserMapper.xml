@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-mybatis.org?DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mybatis.mapper.UserMapper">
+    <insert id="insert">insert into usertable value (null, 'ZhangSan', '123456', 'Super', now())</insert>
+    <insert id="insertOne">insert into usertable(username,password) values (#{arg0},#{arg1})</insert>
+    <insert id="update">update usertable set password='666' where username='ZhangSan'</insert>
+    <insert id="updateOne">update usertable set password='${param0}' where username='${param1}'</insert>
+<!--    <insert id="updateOne">update usertable set password=#{arg0} where username=#{arg1}</insert>-->
+    <insert id="delete">delete from usertable where username='ZhangSan'</insert>
+    <resultMap id="find" type="Usertable">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="createuser" property="createuser"/>
+        <result column="createdate" property="createdate"/>
+<!--        <result column="version" property="version"/>-->
+    </resultMap>
+    <select id="find" resultMap="find">select * from usertable</select>
+    <select id="findOne" resultMap="cn.mybatis.pojo.Usertable" parameterType="int">
+        select * from usertable where id=#{stuId}
+    </select>
+    <select id="findOn" resultMap="cn.mybatis.pojo.Usertable">
+        select * from usertable where id=#{arg0} and username=#{arg1}
+    </select>
+</mapper>

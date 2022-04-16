@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-mybatis.org?DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mybatis.mapper.Mapper">
+
+    <select id="existTable" resultType="Integer">
+        select count(*)
+        from information_schema.TABLES
+        where LCASE(TABLE_NAME = "productinfo")
+    </select>
+
+    <update id="dropTable">
+        drop table if exists ProductInfo
+    </update>
+
+    <update id="createTable">
+        <!--    <update id="createTable" parameterType="String">-->
+        create table if not exists ${stuId}(id int not null auto_increment,name varchar(100),price float,primary key
+        (id))
+    </update>
+    <insert id="insertInfo">insert into ProductInfo value (null, '${arg0}', '${arg1}')</insert>
+    <select id="Query" resultMap="cn.mybatis.pojo.Productinfo" parameterType="int">
+         select * from productinfo where price &lt; ${stuId}
+#          select * from productinfo where price &lt; 100
+    </select>
+</mapper>
