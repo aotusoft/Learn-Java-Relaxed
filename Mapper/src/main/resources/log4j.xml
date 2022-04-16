@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{MM-dd HH:mm:ss SSS} %m (%F:%L) \n"/>
+        </layout>
+    </appender>
+    <!--    将日志输出文件 （循环写入）-->
+    <appender name="RollingFileAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="D:/归档/app.log"/>
+        <!--  设置是否在重新启动服务时，在原有日志的基础上添加新日志  -->
+        <param name="Append" value="true"/>
+<!--        设置保存备份回滚日志的最大个数-->
+        <param name="MaxBackupIndex" value="10"/>
+<!--        设置当日志文件达到此值时自动回滚，单位可以是KB, MB, GB 默认是KB-->
+        <param name="MaxFileSize" value="10kB"/>
+
+<!--        设置日志输出的样式-->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n"/>
+        </layout>
+    </appender>
+    <logger name="java.sql">
+        <level value="debug"/>
+    </logger>
+    <logger name="org.apache.ibatis">
+        <level value="info"/>
+    </logger>
+    <root>
+        <level value="debug"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="RollingFileAppender"/>
+    </root>
+</log4j:configuration>

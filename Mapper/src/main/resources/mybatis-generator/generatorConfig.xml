@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="D:\Program Files\Maven\Repository\mysql\mysql-connector-java\8.0.28\mysql-connector-java-8.0.28.jar"/>
+    <!--    targetRuntime 执行生成逆向工程的版本
+            MyBatis3Simple 生成基本的CRUD(清新简洁版)
+            MyBatis3 生成带条件的CRUD(奢华尊享版)    -->
+    <context id="DB2Tables" targetRuntime="Mybatis3Simple">
+        <!--    数据库连接信息    -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql:///manager?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=utf8&amp;nullCatalogMeansCurrent=true"
+                        userId="root"
+                        password="123456"/>
+        <!--    JavaBean生成策略    -->
+        <javaModelGenerator targetPackage="cn.mybatis.pojo" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--    Sql映射文件生成策略    -->
+        <!--    targetPackage 指定生成位置    -->
+        <sqlMapGenerator targetPackage="mappers" targetProject="./src/main/resources/">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--    Mapper接口生成策略    -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.mybatis.pojo" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--    逆向分析的表    -->
+        <!--        tableName 设置为* 可对应所有表 此时不写 domainObjectName-->
+        <!--        domainObjectName 指定生成类名-->
+        <table tableName="spring" domainObjectName="Spring"/>
+    </context>
+</generatorConfiguration>
