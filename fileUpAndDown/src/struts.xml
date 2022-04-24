@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <package name="struts2" namespace="/"  extends="struts-default">
+          <action name="UpFile" class="Action.UpFileAction" method="execute">
+              <result  name="success">/result.jsp</result>
+              <interceptor-ref name="defaultStack"> <!--引用拦截器-->
+<!--                   限制上传文件最大值为4M-->
+                  <param name="fileUpload.maximumSize">4194303</param>
+<!--                  限制上传文件的扩展名-->
+                  <param name="fileUpload.allowedExtensions">
+                      .txt,.doc,.jpg,.png
+                  </param>
+                  <param name="fileUpload.allowedTypes">
+                      text/plain,application/msword,image/jpeg
+                  </param>
+              </interceptor-ref>
+          </action>
+          <action name="DownLoadFileTest" class="Action.DownloadFile" method="execute">
+               <result type="stream">
+                   <param name="contentType">text/plain</param>
+                   <param name="contentDisposition">
+                       attachment;
+                       filename="1.txt"
+                   </param>
+                   <param name="inputName">downloadFile</param>
+               </result>
+          </action>
+    </package>
+</struts>
