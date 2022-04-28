@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单实用的jQuery表单输入框浮动标签动画特效插件</title>
+    <link rel="stylesheet" href="../css/extract.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style type="text/css">
+        .container {
+            padding: 1.5em 0;
+        }
+
+        .custom-input {
+            position: relative;
+            padding-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .custom-input input {
+            padding-left: 15px;
+        }
+
+        .custom-input label {
+            cursor: text;
+            margin: 0;
+            padding: 0;
+            left: 15px;
+            top: 27px;
+            position: absolute;
+            font-size: 14px;
+            color: #ccc;
+            font-weight: normal;
+            transition: all .3s ease;
+        }
+
+        .custom-input label.active {
+            top: 0;
+            left: 0;
+            font-size: 12px;
+        }
+
+        .custom-input label.active.focusIn {
+            color: #66afe9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="custom-input">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname">
+        </div>
+        <div class="custom-input">
+            <input type="text" class="form-control" id="test">
+        </div>
+        <div class="custom-input">
+            <input type="text" class="form-control" id="test2" placeholder="test 2">
+        </div>
+        <div class="custom-input">
+            <input type="text" class="form-control" placeholder="Placeholder 3">
+        </div>
+        <div class="custom-input">
+            <label>Test 4</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="custom-input">
+            <input type="text" class="form-control" placeholder="Test 5">
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="js/phanimate.jquery.js"></script>
+</body>
+</html>

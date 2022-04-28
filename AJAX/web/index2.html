@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX</title>
+    <link rel="stylesheet" type="text/css" href="./css/notyf.min.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        function ajax() {
+            //创建XMLHttpRequest对象
+            var httpRequest;
+            if (window.XMLHttpRequest) {
+                //目前主流服务器
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                //<= ie 6
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            //配置回调函数
+            httpRequest.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // var notyf = new Notyf({delay: 3000});
+                    // notyf.alert(this.responseText);
+                    // alert(this.responseText);
+                    document.getElementById("Table").innerHTML = this.responseText;
+                }
+            }
+            //GET方式 配置请求
+            httpRequest.open("GET", "JSP/userQuery.jsp?name=zhangsan&password=12", true);
+            //发送请求
+            httpRequest.send();
+
+            // //POST 方式 配置请求
+            // httpRequest.open("POST","/JSP/userQuery.jsp",true);
+            // //配置http头
+            // httpRequest.setRequestHeader("Context-Type","application/x-www-form-urlencoded");
+            // //发送请求
+            // httpRequest.send("name=zhangsan&password=12");
+        }
+    </script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: ghostwhite;
+            cursor: url("./src/cursor.ico"), pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        ::selection {
+            background: #E7E7FF;
+        }
+
+        #Table {
+            width: auto;
+            height: auto;
+        }
+
+        #main {
+            margin: 0 auto;
+            height: fit-content;
+            width: fit-content;
+        }
+
+        button {
+            border: 1px solid #c3c3ff;
+            background: #F8F8FF;
+            color: #ceceff;
+        }
+
+        button:hover {
+            background: #E0E0FF;
+            transition: .15s;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="Table"></div>
+<div class="JQload"></div>
+<div class="JQget"></div>
+<div class="JQpost"></div>
+<div class="JQajax"></div>
+<div id="main">
+    <button id="get" onclick=ajax()>获取数据</button>
+    <button id="JQload" onclick="">jQuery LOAD</button>
+    <button id="JQget" onclick="">jQuery GET</button>
+    <button id="JQpost" onclick="">jQuery POST</button>
+    <button id="JQajax" onclick="">jQuery AJAX</button>
+</div>
+<script src="./js/notyf.min.js" type="text/javascript"></script>
+<script src="./js/notyf.run.js" type="text/javascript"></script>
+<script src="./js/cursor-effects.js"></script>
+</body>
+</html>
+<!--<script src="./js/since.js"></script>-->
+<script type="text/javascript">
+    var notyf = new Notyf({delay: 3000});
+    $(document).ready(function () {
+        $("#get").click(function () {
+            $("#Table").slideDown("slow");
+        });
+    });
+</script>
+<script type="text/javascript">
+    $("#JQload").click(function () {
+            $(".JQload").load("1.txt", function (responseText, status, xhr) {
+                if (statusTxt === "success") {
+                    notyf.confirm("Status：" + status + "\nxhr：" + xhr);
+                }
+                if (statusTxt === "error") {
+                    // alert(xhr.status + xhr.statusText);
+                    notyf.alert(xhr.status + xhr.statusText);
+                }
+            })
+        }
+    )
+    $("#JQget").click(function () {
+            $.JQget.get("./JSP/userQuery.jsp?name=zhangsan&password=12", function (data, status) {
+                    alert("Status：" + status + "\nData：" + data)
+                    notyf.confirm("Status：" + status + "\nData：" + data);
+                }
+            )
+        }
+    )
+    $("#JQpost").click(function () {
+            $.post("./post.jsp",
+                {"name": "张三", "city": "北京"}, function (data, status) {
+                    // alert("Status：" + status + "\nData：" + data)
+                    notyf.confirm("Status：" + status + "\nData：" + data);
+                }
+            )
+        }
+    )
+    $("#JQajax").click(function () {
+            $.ajax({
+                    url: "./userQuery.jsp",     <!-- url:请求地址 -->
+                    type: "post",               <!--type:请求类型:post/get -->
+                    data: {                     <!--data:发送给服务器的数据-->
+                        name: "zhangsan",2
+                        password: "12"
+                    },
+                    dataType: "json",           <!--dataType:服务器返回的数据类型text/xml/script/htmL/json/jsonp -->
+                    success: function (data) {  <!-- 回调函数data的类型必须与 上面dataType指定类型完全一致-->
+                        notyf.confirm("Data：" + data);
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        notyf.confirm("Data：" + data);
+                        console.log(data);
+                    }
+                },
+            )
+        }
+    )
+</script>
+

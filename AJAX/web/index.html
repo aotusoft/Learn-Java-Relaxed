@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="UTF-8">
+    <title>库存管理</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.js"></script>
+    <link rel="stylesheet" href="./css/total.css">
+    <style>
+        #Main {
+            height: 700px;
+            width: 100%;
+        }
+
+        #left {
+            float: left;
+            width: 12%;
+            height: 90vh;
+            border: 5px solid #C3C3FF;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .fun {
+            border-bottom: #ceceff 1px solid;
+            height: 20%;
+            width: 100%;
+            color: #C3C3FF;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #right {
+            float: left;
+            width: 85%;
+            height: 90vh;
+            border: 5px solid #C3C3FF;
+            text-align: center;
+        }
+
+        #top {
+            width: 100%;
+            height: 80vh;
+        }
+
+        #bottom {
+            padding-top: 1vh;
+            width: 100%;
+            height: 10vh;
+            border-top: 1px solid #C3C3FF;
+        }
+
+        #frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        #hitokoto {
+            margin-top: 1px;
+            color: #C3C3FF;
+        }
+    </style>
+</head>
+<body>
+<div id="Main">
+    <div id="left"><!--左侧单元格-->
+        <div class="fun" id="user">用户管理</div>
+        <div class="fun" id="store">库存管理</div>
+        <div class="fun" id="input">入库流水</div>
+        <div class="fun" id="output">出库流水</div>
+        <div class="fun" id="exit">退出</div>
+    </div>
+    <div id="right"><!--右侧单元格-->
+        <div id="top"> <!--右侧上单元格-->
+            <iframe id="frame" src="./JSP/wel.jsp"> <!--框架里调用网页区域--></iframe>
+        </div>
+        <div id="bottom"> <!--右侧下单元格-->
+<!--            <button id="before" class="btn">上一页</button>-->
+<!--            <span>  </span>-->
+<!--            <button id="after" class="btn">下一页</button>-->
+            <p id="hitokoto"></p>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $.get("https://v1.hitokoto.cn/?encode=text", function (data) {
+            document.getElementById("hitokoto").innerHTML = data;
+        });
+    });
+</script>
+</body>
+</html>
+<script>
+    $("#user").click(
+        function () {
+            $("#frame").attr("src", "./JSP/userQuery.jsp");//更改frame的地址
+        }
+    );
+    $("#store").click(
+        function () {
+            $("#frame").attr("src", "./JSP/StoreQuery.jsp");//更改frame的地址
+        }
+    );
+    $("#input").click(
+        function () {
+            $("#frame").attr("src", "./JSP/InputUI.jsp");//更改frame的地址
+        }
+    );
+    $("#output").click(
+        function () {
+            $("#frame").attr("src", "./JSP/OutputUI.jsp");//更改frame的地址
+        }
+    );
+    $("#exit").click(
+        function () {
+            $("#frame").attr("src", "./JSP/outlogin.jsp");//更改frame地址
+        }
+    );
+    let currentPage;
+
+    function a() {
+        currentPage = window.frames[0].document.getElementById("spanPage2").innerText;
+    }
+
+    $("#before").click(
+        function () {
+            a();
+            $("#frame").attr("src", "JSP/userQuery.jsp?Fx=p&Page=" + currentPage);
+        }
+    )
+    $("#after").click(
+        function () {
+            a();
+            $("#frame").attr("src", "JSP/userQuery.jsp?Fx=n&Page=" + currentPage);
+        }
+    )
+</script>
+<script src="./js/cursor-effects.js"></script>
+<script>
+    $(document).ready(function () {
+        $.getJSON('https://v1.hitokoto.cn/?encode=json', function (data) {
+            console.log(data);
+        })
+    })
+</script>

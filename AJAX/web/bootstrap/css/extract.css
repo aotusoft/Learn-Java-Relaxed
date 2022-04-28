@@ -1,0 +1,57 @@
+.custom-input {
+    display: inline;
+    position: relative;
+    padding-top: 35px;
+    margin-bottom: 10px;
+}
+
+.custom-input input {
+    padding-left: 15px;
+}
+
+.custom-input label {
+    cursor: text;
+    margin: 0;
+    padding: 0;
+    left: 15px;
+    top: 35px;
+    position: absolute;
+    font-size: 14px;
+    color: #ccc;
+    font-weight: normal;
+    transition: all .3s ease;
+}
+
+.custom-input label.active {
+    top: 0;
+    left: 0;
+    font-size: 12px;
+}
+
+.custom-input label.active.focusIn {
+    color: #66afe9;
+}
+
+.form-control {
+    margin-top: 30px;
+    display: inline;
+    padding: 6px 12px;
+    width: 160px;
+    height: 34px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}

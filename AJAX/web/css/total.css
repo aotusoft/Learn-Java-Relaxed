@@ -1,0 +1,178 @@
+* {
+    cursor: url("../src/cursor.ico"), pointer;
+}
+
+body {
+    margin: 5px auto;
+    padding: 0;
+    background: ghostwhite;
+    width: 100%;
+    height: 100%;
+}
+
+::selection {
+    background: #E7E7FF;
+}
+
+table {
+    width: 90%;
+    padding: 2px;
+    border: none;
+    /*边框颜色*/
+    background: #C3C3FF;
+    /*字体颜色*/
+    color: #C3C3FF;
+    margin: 10px auto;
+    /*border-collapse: collapse;!*border-collapse:collapse合并内外边距(去除表格单元格默认的2个像素内外边距*!*/
+    border-radius: 3px;
+}
+
+td > button {
+    margin: 3px;
+    height: 20px;
+}
+
+th, td {
+    border: none;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+
+th {
+    /*background: #FBF8C2;*/
+    font-weight: normal;
+}
+
+tr {
+    border: none;
+    /*背景底色*/
+    background: #F8F8FF;
+    transition: .5s;
+}
+
+tr:hover {
+    /*选中底色*/
+    background: #e7e7ff;
+    transition: .5s;
+}
+
+td a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+td a:hover {
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+    transition: .5s;
+}
+
+.button {
+    border: 1px solid #c3c3ff;
+    background: #F8F8FF;
+    color: #ceceff;
+}
+
+.button:hover {
+    background: #E0E0FF;
+    transition: .5s;
+}
+
+.custom-input {
+    display: inline;
+    position: relative;
+    padding-top: 35px;
+    margin-bottom: 10px;
+}
+
+.custom-input input {
+    padding-left: 15px;
+}
+
+.custom-input label {
+    cursor: text;
+    margin: 0;
+    padding: 0;
+    left: 15px;
+    top: 35px;
+    position: absolute;
+    font-size: 14px;
+    color: #ccc;
+    font-weight: normal;
+    transition: all .3s ease;
+}
+
+.custom-input label.active {
+    top: 10px;
+    left: 0;
+    font-size: 12px;
+}
+
+.custom-input label.active.focusIn {
+    color: #C3C3FF;
+}
+
+.form-control {
+    margin-top: 30px;
+    margin-left: 3px;
+    margin-right: 3px;
+    display: inline;
+    padding: 6px 12px;
+    width: 160px;
+    height: 34px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #F8F8FF;
+    border: 1px solid #C3C3FF;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.form-control:focus {
+    border-color: #C3C3FF;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(195, 195, 255, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(195, 195, 255, 0.6);
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #ededff;
+    color: #C3C3FF;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid rgba(255, 255, 255, 0);
+    border-radius: 4px;
+}
+
+.btn.focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+.btn:hover,
+.btn:focus,
+.btn.focus {
+    border: rgba(195, 195, 255, 0.1) 2px solid;
+    color: #b2b2de;
+    text-decoration: none;
+}
+
+.btn:active,
+.btn.active {
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
